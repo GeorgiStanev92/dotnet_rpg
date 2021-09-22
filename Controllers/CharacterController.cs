@@ -1,14 +1,16 @@
 ﻿using dotnet_rpg.DTO.Character;
 using dotnet_rpg.Models;
 using dotnet_rpg.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace dotnet_rpg.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("Character")]
+    [Route("[controller]")]
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterService _characterService;
@@ -17,7 +19,7 @@ namespace dotnet_rpg.Controllers
         {
             _characterService = characterService;
         }
-
+        
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
         {
